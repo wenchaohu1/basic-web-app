@@ -58,11 +58,12 @@ export default function QueryProcessor(query: string): string {
   if (query.toLowerCase().includes("power")) {   
     const matches = query.match(/\d+/g);  
     if (matches && matches.length >= 2) {
-      const numbers = matches.map(Number); // Extract numbers from the query
-      const res = numbers.reduce((acc, curr) => acc ** curr, 1); // Initialize accumulator with 1
-      return `${res}`; 
-    } 
-  } 
+      const numbers = matches.map(Number);
+      const result = numbers.reduce((acc, curr) => acc ** curr, 1);
+      return `${result}`;
+    }
+  }  
+  
 
   if (query.toLowerCase().includes("prime")) {
     const matches = query.match(/\d+/g);
