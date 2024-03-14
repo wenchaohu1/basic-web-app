@@ -65,13 +65,25 @@ export default function QueryProcessor(query: string): string {
 } 
 
   if (query.toLowerCase().includes("power")) {   
-    const matches = query.match(/\d+/g);  
-    if (matches && matches.length >= 2) {
-      const numbers = matches.map(Number);
-      const result = numbers.reduce((acc, curr) => acc ** curr, 1);
-      return `${result}`;
+    const regex = /(\d+)\s*to\s*the\s*power\s*of\s*(\d+)/i;
+    const match = query.match(regex);
+    if (match) {
+      const base = parseInt(match[1]);
+      const exponent = parseInt(match[2]);
+      if (!isNaN(base) && !isNaN(exponent)) {
+        return `${Math.pow(base, exponent)}`;
+      }
     }
-  }  
+  }
+
+  // if (query.toLowerCase().includes("power")) {   
+  //   const matches = query.match(/\d+/g);  
+  //   if (matches && matches.length >= 2) {
+  //     const numbers = matches.map(Number);
+  //     const result = numbers.reduce((acc, curr) => acc ** curr, 1);
+  //     return `${result}`;
+  //   }
+  // }  
   
 
   if (query.toLowerCase().includes("prime")) {
