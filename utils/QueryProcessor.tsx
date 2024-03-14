@@ -41,8 +41,8 @@ export default function QueryProcessor(query: string): string {
     const matches = query.match(/\d+/g);
     if (matches && matches.length >= 2) {
       const numbers = matches.map(Number); // Extract numbers from the query
-      const sum = numbers.reduce((acc, curr) => acc * curr, 0); // Add the numbers together
-      return `${sum}`;
+      const product = numbers.reduce((acc, curr) => acc * curr, 1); // Initialize accumulator with 1
+      return `${product}`; 
     } 
 }
 
@@ -53,16 +53,12 @@ export default function QueryProcessor(query: string): string {
       const number = findSquareCubeNumber(numbers);  
       return `${number}`;
     } 
-}
-
+} 
   return "";
-}
-
+} 
 
 function findLargestNumber(numbers: number[]): number {
-  let largest = numbers[0]; // Assume the first number is the largest
-
-  // Iterate through the array to find the largest number
+  let largest = numbers[0];  
   for (let i = 1; i < numbers.length; i++) {
       if (numbers[i] > largest) {
           largest = numbers[i];
