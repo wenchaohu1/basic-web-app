@@ -30,10 +30,15 @@ export default function QueryProcessor(query: string): string {
     }
   }
 
-  if (query.toLowerCase().includes("plus")) { 
-    return (
-      "73"
-    );
+  if (query.toLowerCase().includes("plus")) {  
+      const matches = query.match(/\d+/g);
+      if (matches && matches.length >= 2) {
+        const numbers = matches.map(Number); // Extract numbers from the query
+        const sum = numbers.reduce((acc, curr) => acc + curr, 0); // Add the numbers together
+        return `${sum}`;
+      } else {
+        return "Please provide two numbers to add";
+      } 
   }
 
   return "";
