@@ -37,6 +37,15 @@ export default function QueryProcessor(query: string): string {
       } 
   }
 
+  if (query.toLowerCase().includes("minus")) {  
+    const matches = query.match(/\d+/g);
+    if (matches && matches.length >= 2) {
+      const numbers = matches.map(Number); // Extract numbers from the query
+      const res = numbers.reduce((acc, curr) => acc - curr, 0); // Add the numbers together
+      return `${res}`;
+    } 
+}
+
   if (query.toLowerCase().includes("multiplied")) {  
     const matches = query.match(/\d+/g);
     if (matches && matches.length >= 2) {
