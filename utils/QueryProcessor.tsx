@@ -80,7 +80,7 @@ export default function QueryProcessor(query: string): string {
   //   const matches = query.match(/\d+/g);  
   //   if (matches && matches.length >= 2) {
   //     const numbers = matches.map(Number);
-  //     const result = numbers.reduce((acc, curr) => acc ** curr, 1);
+  //     const result = numbers.reduce((acc, curr) => acc ** curr);
   //     return `${result}`;
   //   }
   // }  
@@ -129,7 +129,7 @@ function isPerfectCube(num: number): boolean {
 }
 
 
-function isPrime(num) {
+function isPrime(num: number) {
   if (num <= 1) return false;
   if (num <= 3) return true;
 
