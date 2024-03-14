@@ -54,6 +54,16 @@ export default function QueryProcessor(query: string): string {
       return `${number}`;
     } 
 } 
+
+if (query.toLowerCase().includes("power")) {   
+  const matches = query.match(/\d+/g);  
+  if (matches && matches.length >= 2) {
+    const numbers = matches.map(Number); // Extract numbers from the query
+    const res = numbers.reduce((acc, curr) => acc ** curr, 1); // Initialize accumulator with 1
+    return `${res}`; 
+  } 
+} 
+
   return "";
 } 
 
