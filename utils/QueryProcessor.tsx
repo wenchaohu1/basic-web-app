@@ -19,7 +19,7 @@ export default function QueryProcessor(query: string): string {
   }
 
 
-  if (query.toLowerCase().includes("numbers is the largest")) { 
+  if (query.toLowerCase().includes("largest")) { 
     const matches = query.match(/\d+/g);
     if (matches) {
       const numbers = matches.map(Number); // Extract numbers from the query
@@ -37,6 +37,24 @@ export default function QueryProcessor(query: string): string {
       } 
   }
 
+  if (query.toLowerCase().includes("multiplied")) {  
+    const matches = query.match(/\d+/g);
+    if (matches && matches.length >= 2) {
+      const numbers = matches.map(Number); // Extract numbers from the query
+      const sum = numbers.reduce((acc, curr) => acc * curr, 0); // Add the numbers together
+      return `${sum}`;
+    } 
+}
+
+  if (query.toLowerCase().includes("square")) {   
+    const matches = query.match(/\d+/g);  
+    if (matches && matches.length >= 2) {
+      const numbers = matches.map(Number); // Extract numbers from the query
+      const number = findSquareCubeNumber(numbers);  
+      return `${number}`;
+    } 
+}
+
   return "";
 }
 
@@ -52,4 +70,23 @@ function findLargestNumber(numbers: number[]): number {
   }
 
   return largest;
+} 
+
+function findSquareCubeNumber(numbers: number[]): number {
+  for (const num of numbers) {
+    if (isPerfectSquare(num) && isPerfectCube(num)) {
+      return num;
+    }
+  }
+  return -1; // Return -1 if no such number is found
+}
+
+function isPerfectSquare(num: number): boolean {
+  const sqrt = Math.sqrt(num);
+  return sqrt === Math.floor(sqrt);
+}
+
+function isPerfectCube(num: number): boolean {
+  const cubeRoot = Math.cbrt(num);
+  return cubeRoot === Math.floor(cubeRoot);
 }
