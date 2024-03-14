@@ -55,14 +55,23 @@ export default function QueryProcessor(query: string): string {
     } 
 } 
 
-if (query.toLowerCase().includes("power")) {   
-  const matches = query.match(/\d+/g);  
-  if (matches && matches.length >= 2) {
-    const numbers = matches.map(Number); // Extract numbers from the query
-    const res = numbers.reduce((acc, curr) => acc ** curr, 1); // Initialize accumulator with 1
-    return `${res}`; 
+  if (query.toLowerCase().includes("power")) {   
+    const matches = query.match(/\d+/g);  
+    if (matches && matches.length >= 2) {
+      const numbers = matches.map(Number); // Extract numbers from the query
+      const res = numbers.reduce((acc, curr) => acc ** curr, 1); // Initialize accumulator with 1
+      return `${res}`; 
+    } 
   } 
-} 
+
+  if (query.toLowerCase().includes("prime")) {
+    const matches = query.match(/\d+/g);
+    if (matches && matches.length >= 1) {
+      const numbers = matches.map(Number);
+      const primes = numbers.filter(isPrime);
+      return primes.join(', ');
+    }
+  } 
 
   return "";
 } 
@@ -95,4 +104,20 @@ function isPerfectSquare(num: number): boolean {
 function isPerfectCube(num: number): boolean {
   const cubeRoot = Math.cbrt(num);
   return cubeRoot === Math.floor(cubeRoot);
+}
+
+
+function isPrime(num) {
+  if (num <= 1) return false;
+  if (num <= 3) return true;
+
+  if (num % 2 === 0 || num % 3 === 0) return false;
+
+  let i = 5;
+  while (i * i <= num) {
+    if (num % i === 0 || num % (i + 2) === 0) return false;
+    i += 6;
+  }
+
+  return true;
 }
