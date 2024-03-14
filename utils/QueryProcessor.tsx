@@ -24,10 +24,8 @@ export default function QueryProcessor(query: string): string {
     if (matches) {
       const numbers = matches.map(Number); // Extract numbers from the query
       const largestNumber = findLargestNumber(numbers);
-      return `The largest number is: ${largestNumber}`;
-    } else {
-      return "No numbers found in the query";
-    }
+      return `${largestNumber}`;
+    } 
   }
 
   if (query.toLowerCase().includes("plus")) {  
@@ -36,8 +34,6 @@ export default function QueryProcessor(query: string): string {
         const numbers = matches.map(Number); // Extract numbers from the query
         const sum = numbers.reduce((acc, curr) => acc + curr, 0); // Add the numbers together
         return `${sum}`;
-      } else {
-        return "Please provide two numbers to add";
       } 
   }
 
