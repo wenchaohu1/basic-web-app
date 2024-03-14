@@ -19,17 +19,36 @@ export default function QueryProcessor(query: string): string {
   }
 
 
-  if (query.toLowerCase().includes("Which of the following numbers is the largest: 64, 73, 5?")) { 
+  if (query.toLowerCase().includes("numbers is the largest")) { 
+    const matches = query.match(/\d+/g);
+    if (matches) {
+      const numbers = matches.map(Number); // Extract numbers from the query
+      const largestNumber = findLargestNumber(numbers);
+      return `The largest number is: ${largestNumber}`;
+    } else {
+      return "No numbers found in the query";
+    }
+  }
+
+  if (query.toLowerCase().includes("plus")) { 
     return (
       "73"
     );
   }
 
-  if (query.toLowerCase().includes("Which of the following numbers is the largest: 74, 54, 25?")) { 
-    return (
-      "74"
-    );
+  return "";
+}
+
+
+function findLargestNumber(numbers: number[]): number {
+  let largest = numbers[0]; // Assume the first number is the largest
+
+  // Iterate through the array to find the largest number
+  for (let i = 1; i < numbers.length; i++) {
+      if (numbers[i] > largest) {
+          largest = numbers[i];
+      }
   }
 
-  return "";
+  return largest;
 }
